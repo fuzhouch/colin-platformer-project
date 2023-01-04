@@ -17,5 +17,5 @@ func _physics_process(delta):
 	move_and_slide(velocity)
 	
 	velocity.x = lerp(velocity.x, 0, 0.1)
-	# Lerp = Linear interoperation
+	# Lerp = Linear interpolation
 	# 0.1 = 10%
