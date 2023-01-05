@@ -8,6 +8,7 @@ var velocity = Vector2(0, 0)
 const SPEED = 180
 const GRAVITY = 10
 const JUMPFORCE = -500
+const DOUBLE_JUMP_FORCE = -300
 
 func _physics_process(delta):
 	if Input.is_action_pressed("ui_right"):
@@ -39,7 +40,7 @@ func _physics_process(delta):
 			allow_double_jump = true
 		else:
 			if allow_double_jump: # Already in double jump status
-				velocity.y = JUMPFORCE
+				velocity.y = DOUBLE_JUMP_FORCE
 				allow_double_jump = false
 		
 	# "Slide" means - character keeps moving with same speed
