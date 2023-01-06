@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tsetseg-07.png-9c614b200086abc2e7f512caff6e01c1.stex"
+path="res://.import/tsetseg-walk1.png-fa2a08c7fca8061b08130086c3b3191b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tsetseg-07.png"
-dest_files=[ "res://.import/Tsetseg-07.png-9c614b200086abc2e7f512caff6e01c1.stex" ]
+source_file="res://assets/tsetseg-walk1.png"
+dest_files=[ "res://.import/tsetseg-walk1.png-fa2a08c7fca8061b08130086c3b3191b.stex" ]
 
 [params]
 

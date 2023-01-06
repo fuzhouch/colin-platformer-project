@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tsetseg-01.png-ca26c9475cfffef63ef6fc95af7f32da.stex"
+path="res://.import/tsetseg-stand.png-a454534b197f0560319f6e1da6392717.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tsetseg-01.png"
-dest_files=[ "res://.import/Tsetseg-01.png-ca26c9475cfffef63ef6fc95af7f32da.stex" ]
+source_file="res://assets/tsetseg-stand.png"
+dest_files=[ "res://.import/tsetseg-stand.png-a454534b197f0560319f6e1da6392717.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

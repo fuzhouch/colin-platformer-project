@@ -10,12 +10,21 @@ const GRAVITY = 10
 const JUMPFORCE = -500
 const DOUBLE_JUMP_FORCE = -300
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_pressed("ui_right"):
 		velocity.x = SPEED
-	if Input.is_action_pressed("ui_left"):
+		$Sprite.play("walk")
+		$Sprite.flip_h = false
+	elif Input.is_action_pressed("ui_left"):
 		velocity.x = -SPEED
-	
+		$Sprite.play("walk")
+		$Sprite.flip_h = true
+	else:
+		$Sprite.play("idle")
+		
+	if not is_on_floor():
+		$Sprite.play("idle")
+
 	# Simply adding velocity is incorrect. It should
 	# be reset to 0 on collision (Tsetseg falls on floor)
 	velocity.y += GRAVITY
