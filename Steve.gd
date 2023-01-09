@@ -23,7 +23,7 @@ func _physics_process(_delta):
 		$Sprite.play("idle")
 		
 	if not is_on_floor():
-		$Sprite.play("idle")
+		$Sprite.play("jump")
 
 	# Simply adding velocity is incorrect. It should
 	# be reset to 0 on collision (Tsetseg falls on floor)

@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=2]
+
+[ext_resource path="res://assets/my-steve-0001.png" type="Texture" id=1]
+[ext_resource path="res://assets/my-steve-0002.png" type="Texture" id=2]
+[ext_resource path="res://assets/my-steve-0003.png" type="Texture" id=3]
+[ext_resource path="res://assets/my-steve-0006.png" type="Texture" id=4]
+[ext_resource path="res://assets/my-steve-0005.png" type="Texture" id=5]
+[ext_resource path="res://assets/my-steve-0004.png" type="Texture" id=6]
+[ext_resource path="res://assets/my-steve-0007.png" type="Texture" id=7]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "climb",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "hit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]

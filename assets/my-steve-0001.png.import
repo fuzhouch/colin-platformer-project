@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tsetseg-stand.png-a454534b197f0560319f6e1da6392717.stex"
+path="res://.import/my-steve-0001.png-4a504b21d0d499669fe814365aea7a8f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tsetseg-stand.png"
-dest_files=[ "res://.import/tsetseg-stand.png-a454534b197f0560319f6e1da6392717.stex" ]
+source_file="res://assets/my-steve-0001.png"
+dest_files=[ "res://.import/my-steve-0001.png-4a504b21d0d499669fe814365aea7a8f.stex" ]
 
 [params]
 
