@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var allow_double_jump = false
+var in_double_jump = false
 var velocity = Vector2(0, 0)
 
 # The constants here needs to be tuned, computing
@@ -21,9 +21,6 @@ func _physics_process(_delta):
 		$Sprite.flip_h = true
 	else:
 		$Sprite.play("idle")
-		
-	if not is_on_floor():
-		$Sprite.play("jump")
 
 	# Simply adding velocity is incorrect. It should
 	# be reset to 0 on collision (Tsetseg falls on floor)
@@ -46,12 +43,18 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_up"):
 		if is_on_floor():
 			velocity.y = JUMPFORCE
-			allow_double_jump = true
+			in_double_jump = false
 		else:
-			if allow_double_jump: # Already in double jump status
+			if not in_double_jump: # Already in double jump status
 				velocity.y = DOUBLE_JUMP_FORCE
-				allow_double_jump = false
+				in_double_jump = true
 		
+	# $Sprite.play() appears to be a declarative call, that
+	# the last .play() calls decides the animation we finally
+	# play in this frame.
+	if not is_on_floor():
+		$Sprite.play("jump")
+	
 	# "Slide" means - character keeps moving with same speed
 	# when starts moving, it does not stop if we have no more
 	# action.
