@@ -63,3 +63,13 @@ func _physics_process(_delta):
 	velocity.x = lerp(velocity.x, 0, 0.1)
 	# Lerp = Linear interpolation
 	# 0.1 = 10%
+
+# This signal is triggered Steve enters this area (fall under cliff).
+func _on_GameOverDetectArea2D_body_entered(body):
+	print("Game over!")
+	get_tree().change_scene("res://Level1.tscn")
+
+# This signal is triggerred when reaching end-game gate.
+func _on_GameWinDetectArea2D_body_entered(body):
+	print("Game Win!") 
+	get_tree().change_scene("res://Level1.tscn")

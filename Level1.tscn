@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://world.tres" type="TileSet" id=1]
 [ext_resource path="res://Steve.tscn" type="PackedScene" id=2]
@@ -8,6 +8,12 @@ extents = Vector2( 96, 32.2697 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 96, 34.625 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1338.5, 32 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 32, 32 )
 
 [node name="Level1" type="Node2D"]
 
@@ -46,3 +52,26 @@ limit_right = 3582
 limit_bottom = 768
 editor_draw_limits = true
 editor_draw_drag_margin = true
+
+[node name="GameOverDetectArea2D" type="Area2D" parent="."]
+position = Vector2( 768, 800 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverDetectArea2D"]
+position = Vector2( 1472, 32 )
+shape = SubResource( 3 )
+
+[node name="GameWinDetectArea2D" type="Area2D" parent="."]
+position = Vector2( 3296, 480 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWinDetectArea2D"]
+position = Vector2( 64, 32 )
+shape = SubResource( 4 )
+
+[connection signal="body_entered" from="GameOverDetectArea2D" to="Steve" method="_on_GameOverDetectArea2D_body_entered"]
+[connection signal="body_entered" from="GameWinDetectArea2D" to="Steve" method="_on_GameWinDetectArea2D_body_entered"]
