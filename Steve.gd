@@ -67,9 +67,14 @@ func _physics_process(_delta):
 # This signal is triggered Steve enters this area (fall under cliff).
 func _on_GameOverDetectArea2D_body_entered(body):
 	print("Game over!")
-	get_tree().change_scene("res://Level1.tscn")
+	var scene = get_tree().current_scene.filename
+	get_tree().change_scene(scene)
 
 # This signal is triggerred when reaching end-game gate.
 func _on_GameWinDetectArea2D_body_entered(body):
-	print("Game Win!") 
-	get_tree().change_scene("res://Level1.tscn")
+	print("Game Win!")
+	var scene = get_tree().current_scene.filename
+	if scene == "res://Level1.tscn":
+		get_tree().change_scene("res://Level2.tscn")
+	else:
+		get_tree().change_scene("res://Level1.tscn")
