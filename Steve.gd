@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var in_double_jump = false
 var velocity = Vector2(0, 0)
+var coin = 0
 
 # The constants here needs to be tuned, computing
 # with size of screen and floors.
@@ -63,6 +64,13 @@ func _physics_process(_delta):
 	velocity.x = lerp(velocity.x, 0, 0.1)
 	# Lerp = Linear interpolation
 	# 0.1 = 10%
+	
+	# If you wanna take action when coin
+	# is collected, e.g., move to next level,
+	# Colin says we may consider doing something here.
+	# However I don't quite like this idea
+	# as this function is called every frame.
+	# Let's think about it for a better place.
 
 # This signal is triggered Steve enters this area (fall under cliff).
 func _on_GameOverDetectArea2D_body_entered(_body):
@@ -79,3 +87,11 @@ func _on_GameWinDetectArea2D_body_entered(_body):
 	else:
 		var _ignore = get_tree().change_scene("res://Level1.tscn")
 	return
+
+# This function is called from Battery.gd
+# in body_entered() signal. In fact GDScript
+# allows calling body.coin from Battery.gd, but
+# using method is better for clean interface.
+func add_coin():
+	coin = coin + 1
+	print("coin collected: ", coin)

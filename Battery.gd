@@ -4,5 +4,10 @@ extends Area2D
 func _ready():
 	pass # Replace with function body.
 
-func _on_Battery_body_entered(_body):
+func _on_Battery_body_entered(body):
+	$AnimationPlayer.play("BatteryBounce")
+	body.add_coin()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
 	queue_free()

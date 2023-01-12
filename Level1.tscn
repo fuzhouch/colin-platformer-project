@@ -48,7 +48,6 @@ one_way_collision = true
 
 [node name="Steve" parent="." instance=ExtResource( 2 )]
 position = Vector2( 216, 314 )
-collision_mask = 62
 
 [node name="Camera2D" type="Camera2D" parent="Steve"]
 position = Vector2( 0, -136 )
@@ -81,12 +80,21 @@ shape = SubResource( 4 )
 
 [node name="Battery1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 864, 319 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Battery2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1120, 63 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Battery3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2624, 127 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [connection signal="body_entered" from="GameOverDetectArea2D" to="Steve" method="_on_GameOverDetectArea2D_body_entered"]
 [connection signal="body_entered" from="GameWinDetectArea2D" to="Steve" method="_on_GameWinDetectArea2D_body_entered"]
