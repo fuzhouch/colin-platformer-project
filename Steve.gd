@@ -4,6 +4,9 @@ var in_double_jump = false
 var velocity = Vector2(0, 0)
 var coin = 0
 
+var use_tsetseg = true
+var current_sprite
+
 # The constants here needs to be tuned, computing
 # with size of screen and floors.
 const SPEED = 180
@@ -11,17 +14,27 @@ const GRAVITY = 10
 const JUMPFORCE = -500
 const DOUBLE_JUMP_FORCE = -300
 
+func _ready():
+	if use_tsetseg:
+		current_sprite = $Tsetseg
+		$Sprite.visible = false
+		$Tsetseg.visible = true
+	else:
+		current_sprite = $Sprite
+		$Sprite.visible = true
+		$Tsetseg.visible = false
+
 func _physics_process(_delta):
 	if Input.is_action_pressed("ui_right"):
 		velocity.x = SPEED
-		$Sprite.play("walk")
-		$Sprite.flip_h = false
+		current_sprite.play("walk")
+		current_sprite.flip_h = false
 	elif Input.is_action_pressed("ui_left"):
 		velocity.x = -SPEED
-		$Sprite.play("walk")
-		$Sprite.flip_h = true
+		current_sprite.play("walk")
+		current_sprite.flip_h = true
 	else:
-		$Sprite.play("idle")
+		current_sprite.play("idle")
 
 	# Simply adding velocity is incorrect. It should
 	# be reset to 0 on collision (Tsetseg falls on floor)
@@ -54,7 +67,7 @@ func _physics_process(_delta):
 	# the last .play() calls decides the animation we finally
 	# play in this frame.
 	if not is_on_floor():
-		$Sprite.play("jump")
+		current_sprite.play("jump")
 	
 	# "Slide" means - character keeps moving with same speed
 	# when starts moving, it does not stop if we have no more
