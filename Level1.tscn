@@ -96,5 +96,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="Battery4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1376, 543 )
+__meta__ = {
+"_edit_group_": true
+}
+
 [connection signal="body_entered" from="GameOverDetectArea2D" to="Steve" method="_on_GameOverDetectArea2D_body_entered"]
 [connection signal="body_entered" from="GameWinDetectArea2D" to="Steve" method="_on_GameWinDetectArea2D_body_entered"]
