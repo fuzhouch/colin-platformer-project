@@ -1,8 +1,18 @@
 extends Area2D
 
+var use_tsetseg = true
+var current_sprite
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if use_tsetseg:
+		current_sprite = $Tsetseg
+		$Sprite.visible = false
+		$Tsetseg.visible = true
+	else:
+		current_sprite = $Sprite
+		$Sprite.visible = true
+		$Tsetseg.visible = false
 
 func _on_Battery_body_entered(body):
 	$AnimationPlayer.play("BatteryBounce")
