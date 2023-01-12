@@ -84,11 +84,9 @@ position = Vector2( 864, 319 )
 
 [node name="Battery2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1120, 63 )
-collision_layer = 1
 
 [node name="Battery3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2624, 127 )
-collision_layer = 1
 
 [connection signal="body_entered" from="GameOverDetectArea2D" to="Steve" method="_on_GameOverDetectArea2D_body_entered"]
 [connection signal="body_entered" from="GameWinDetectArea2D" to="Steve" method="_on_GameWinDetectArea2D_body_entered"]
