@@ -4,7 +4,7 @@ var in_double_jump = false
 var velocity = Vector2(0, 0)
 var coin = 0
 
-var use_tsetseg = true
+var use_tsetseg = false
 var current_sprite
 
 # The constants here needs to be tuned, computing

@@ -88,27 +88,15 @@ shape = SubResource( 4 )
 
 [node name="Battery1" parent="Batteries" instance=ExtResource( 3 )]
 position = Vector2( 864, 319 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Battery2" parent="Batteries" instance=ExtResource( 3 )]
 position = Vector2( 1120, 63 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Battery3" parent="Batteries" instance=ExtResource( 3 )]
 position = Vector2( 2624, 127 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Battery4" parent="Batteries" instance=ExtResource( 3 )]
 position = Vector2( 1376, 543 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Enemies" type="Node2D" parent="."]
 

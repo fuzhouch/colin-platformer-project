@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var use_tsetseg = true
+var use_tsetseg = false
 var current_sprite
 
 var velocity = Vector2()
@@ -17,6 +17,7 @@ func _ready():
 		current_sprite = $Sprite
 		$Sprite.visible = true
 		$Tsetseg.visible = false
+		current_sprite.flip_h = true
 	current_sprite.playing = true
 	
 	if direction == 1:

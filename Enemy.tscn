@@ -1,10 +1,29 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
 [ext_resource path="res://tsetseg_enemy_spriteframes.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://assets/badrobot-spritesheet-0001.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 37, 37 )
+extents = Vector2( 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "crawl",
+"speed": 5.0
+} ]
 
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 16
@@ -19,7 +38,8 @@ frames = ExtResource( 2 )
 animation = "crawl"
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 2 )
+frames = SubResource( 4 )
+animation = "crawl"
 
 [node name="FloorChecker" type="RayCast2D" parent="."]
 enabled = true
