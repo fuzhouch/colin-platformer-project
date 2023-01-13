@@ -114,6 +114,15 @@ __meta__ = {
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 704, 319 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 2464, 319 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [connection signal="body_entered" from="GameOverDetectArea2D" to="Steve" method="_on_GameOverDetectArea2D_body_entered"]
 [connection signal="body_entered" from="GameWinDetectArea2D" to="Steve" method="_on_GameWinDetectArea2D_body_entered"]

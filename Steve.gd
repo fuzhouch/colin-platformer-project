@@ -19,10 +19,12 @@ func _ready():
 		current_sprite = $Tsetseg
 		$Sprite.visible = false
 		$Tsetseg.visible = true
+		$Mom.visible = false
 	else:
 		current_sprite = $Sprite
 		$Sprite.visible = true
 		$Tsetseg.visible = false
+		$Mom.visible = false
 
 func _physics_process(_delta):
 	if Input.is_action_pressed("ui_right"):
@@ -36,8 +38,9 @@ func _physics_process(_delta):
 	else:
 		current_sprite.play("idle")
 
-	# Simply adding velocity is incorrect. It should
-	# be reset to 0 on collision (Tsetseg falls on floor)
+	# Make falling faster if no blocking.
+	# When game running, velocity should be back to 0
+	# when hitting floor
 	velocity.y += GRAVITY
 	
 	# "Just" pressing means we process it only once at
@@ -108,3 +111,8 @@ func _on_GameWinDetectArea2D_body_entered(_body):
 func add_coin():
 	coin = coin + 1
 	print("coin collected: ", coin)
+	if coin == 2 and use_tsetseg:
+		$Mom.visible = true
+		$Tsetseg.visible = false
+		current_sprite = $Mom
+		print("Role change to mom!")
