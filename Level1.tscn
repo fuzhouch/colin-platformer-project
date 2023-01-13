@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://world.tres" type="TileSet" id=1]
 [ext_resource path="res://Steve.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Battery.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 32.2697 )
@@ -35,6 +36,8 @@ format = 1
 tile_data = PoolIntArray( 196645, 21, 0, 196646, 22, 0, 196647, 23, 0, 393253, 21, 0, 393254, 22, 0, 393255, 23, 0 )
 
 [node name="Static-Shelf" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 49
 
 [node name="Shelf-CollisonShape" type="CollisionShape2D" parent="Static-Shelf"]
 position = Vector2( 2464, 416 )
@@ -62,6 +65,9 @@ editor_draw_drag_margin = true
 [node name="GameOverDetectArea2D" type="Area2D" parent="."]
 position = Vector2( 544, 799 )
 collision_layer = 4
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverDetectArea2D"]
 position = Vector2( 1408, 32 )
@@ -78,29 +84,36 @@ __meta__ = {
 position = Vector2( 64, 32 )
 shape = SubResource( 4 )
 
-[node name="Battery1" parent="." instance=ExtResource( 3 )]
+[node name="Batteries" type="Node2D" parent="."]
+
+[node name="Battery1" parent="Batteries" instance=ExtResource( 3 )]
 position = Vector2( 864, 319 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Battery2" parent="." instance=ExtResource( 3 )]
+[node name="Battery2" parent="Batteries" instance=ExtResource( 3 )]
 position = Vector2( 1120, 63 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Battery3" parent="." instance=ExtResource( 3 )]
+[node name="Battery3" parent="Batteries" instance=ExtResource( 3 )]
 position = Vector2( 2624, 127 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Battery4" parent="." instance=ExtResource( 3 )]
+[node name="Battery4" parent="Batteries" instance=ExtResource( 3 )]
 position = Vector2( 1376, 543 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy1" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 704, 319 )
 
 [connection signal="body_entered" from="GameOverDetectArea2D" to="Steve" method="_on_GameOverDetectArea2D_body_entered"]
 [connection signal="body_entered" from="GameWinDetectArea2D" to="Steve" method="_on_GameWinDetectArea2D_body_entered"]

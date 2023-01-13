@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemy.gd" type="Script" id=1]
+[ext_resource path="res://tsetseg_enemy_spriteframes.tres" type="SpriteFrames" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 37, 37 )
+
+[node name="Enemy" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Tsetseg" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "crawl"
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
