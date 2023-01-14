@@ -1,6 +1,6 @@
 extends Area2D
 
-var use_tsetseg = false
+export var use_tsetseg = false
 var current_sprite
 
 # Called when the node enters the scene tree for the first time.

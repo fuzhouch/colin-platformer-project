@@ -3,8 +3,9 @@ extends KinematicBody2D
 var in_double_jump = false
 var velocity = Vector2(0, 0)
 var coin = 0
+var hit_points = 2
 
-var use_tsetseg = false
+export var use_tsetseg = false
 var current_sprite
 
 # The constants here needs to be tuned, computing
@@ -88,11 +89,14 @@ func _physics_process(_delta):
 	# as this function is called every frame.
 	# Let's think about it for a better place.
 
+func game_over():
+	var scene = get_tree().current_scene.filename
+	var _ignore = get_tree().change_scene(scene)
+
 # This signal is triggered Steve enters this area (fall under cliff).
 func _on_GameOverDetectArea2D_body_entered(_body):
 	print("Game over!")
-	var scene = get_tree().current_scene.filename
-	var _ignore = get_tree().change_scene(scene)
+	game_over()
 
 # This signal is triggerred when reaching end-game gate.
 func _on_GameWinDetectArea2D_body_entered(_body):
@@ -110,9 +114,45 @@ func _on_GameWinDetectArea2D_body_entered(_body):
 # using method is better for clean interface.
 func add_coin():
 	coin = coin + 1
+	hit_points = hit_points + 1
 	print("coin collected: ", coin)
+	print("coin refills hit point: ", hit_points)
 	if coin == 2 and use_tsetseg:
 		$Mom.visible = true
 		$Tsetseg.visible = false
 		current_sprite = $Mom
 		print("Role change to mom!")
+
+# Called by enemy sprite, hit_checker.body_entered() signal.
+func hit(var enemy_x):
+	hit_points = hit_points - 1
+	print("hit_points: ", hit_points)
+	if hit_points == 0:
+		game_over()
+	# This is required to avoid player keeps
+	# pressing direction key to make Steve continue
+	# moving forward and perform a successful attack
+	# to enemy.
+	Input.action_release("ui_left")
+	Input.action_release("ui_right")
+	# Temporarily change color a bit to display
+	# a "hit" animation
+	set_modulate(Color(1,0.3,0.3,0.5))
+	# Jump back a bit
+	velocity.y = JUMPFORCE * 0.3
+	current_sprite.play("jump")
+	$HitRecoverTimer.start()
+
+	if position.x <= enemy_x:
+		velocity.x = -800
+	elif position.x > enemy_x:
+		velocity.x = 800
+
+# Called by enemy sprite when we have a successful hit.
+func bounce():
+	velocity.y = JUMPFORCE * 0.3
+	current_sprite.play("jump")
+
+
+func _on_HitRecoverTimer_timeout():
+	set_modulate(Color(1,1,1,1))

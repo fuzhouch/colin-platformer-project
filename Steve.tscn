@@ -31,3 +31,7 @@ animation = "walk"
 [node name="Mom" type="AnimatedSprite" parent="."]
 frames = ExtResource( 4 )
 animation = "jump"
+
+[node name="HitRecoverTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="HitRecoverTimer" to="." method="_on_HitRecoverTimer_timeout"]
