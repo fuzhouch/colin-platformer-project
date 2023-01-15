@@ -90,7 +90,7 @@ position = Vector2( 1376, 543 )
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 704, 319 )
+position = Vector2( 768, 319 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -109,7 +109,7 @@ __meta__ = {
 }
 
 [node name="Steve" parent="." instance=ExtResource( 2 )]
-position = Vector2( 216, 314 )
+position = Vector2( 320, 319 )
 
 [node name="Camera2D" type="Camera2D" parent="Steve"]
 position = Vector2( 0, -136 )
@@ -127,7 +127,7 @@ __meta__ = {
 [node name="HeadsUpDisplay" type="CanvasLayer" parent="."]
 
 [node name="TouchscreenJoypad" parent="HeadsUpDisplay" instance=ExtResource( 5 )]
-position = Vector2( 96, -64 )
+position = Vector2( 0, 0 )
 __meta__ = {
 "_edit_group_": true
 }

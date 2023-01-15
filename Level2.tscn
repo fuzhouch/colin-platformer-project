@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://world.tres" type="TileSet" id=1]
 [ext_resource path="res://Steve.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TouchscreenJoypad.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 32.2697 )
@@ -72,6 +73,11 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWinDetectArea2D"]
 position = Vector2( 64, 32 )
 shape = SubResource( 4 )
+
+[node name="HeadsUpDisplay" type="CanvasLayer" parent="."]
+
+[node name="TouchscreenJoypad" parent="HeadsUpDisplay" instance=ExtResource( 3 )]
+position = Vector2( 0, 0 )
 
 [connection signal="body_entered" from="GameOverDetectArea2D" to="Steve" method="_on_GameOverDetectArea2D_body_entered"]
 [connection signal="body_entered" from="GameWinDetectArea2D" to="Steve" method="_on_GameWinDetectArea2D_body_entered"]

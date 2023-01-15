@@ -3,18 +3,6 @@
 [ext_resource path="res://assets/joystick-0001.png" type="Texture" id=1]
 [ext_resource path="res://TouchscreenJoypad.gd" type="Script" id=2]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 64, 64 )
-
-[sub_resource type="RectangleShape2D" id=6]
-
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
@@ -27,17 +15,17 @@ region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="RectangleShape2D" id=7]
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 64, 64 )
+region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 256, 0, 64, 64 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=6]
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
@@ -50,6 +38,20 @@ atlas = ExtResource( 1 )
 region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
@@ -62,6 +64,7 @@ atlas = ExtResource( 1 )
 region = Rect2( 64, 64, 64, 64 )
 
 [sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 32, 32 )
 
 [node name="TouchscreenJoypad" type="Node2D"]
 modulate = Color( 1, 1, 1, 0.25098 )
@@ -70,41 +73,48 @@ script = ExtResource( 2 )
 always_on_screen = true
 
 [node name="TouchScreenUp" type="TouchScreenButton" parent="."]
-position = Vector2( 158, 316 )
-scale = Vector2( 2.5, 2.5 )
-normal = SubResource( 1 )
-pressed = SubResource( 11 )
-shape = SubResource( 6 )
-action = "ui_up"
-
-[node name="TouchScreenDown" type="TouchScreenButton" parent="."]
-position = Vector2( 160, 640 )
-scale = Vector2( 2.5, 2.5 )
+visible = false
+position = Vector2( 64, 448 )
+scale = Vector2( 3, 3 )
 normal = SubResource( 2 )
 pressed = SubResource( 12 )
 shape = SubResource( 7 )
+passby_press = true
+action = "ui_up"
+
+[node name="TouchScreenDown" type="TouchScreenButton" parent="."]
+visible = false
+position = Vector2( 64, 704 )
+scale = Vector2( 3, 3 )
+normal = SubResource( 1 )
+pressed = SubResource( 11 )
+shape = SubResource( 6 )
+passby_press = true
 action = "ui_down"
 
-[node name="TouchScreenLeft" type="TouchScreenButton" parent="."]
-position = Vector2( -5, 480 )
-scale = Vector2( 2.5, 2.5 )
-normal = SubResource( 3 )
-pressed = SubResource( 13 )
-shape = SubResource( 8 )
-action = "ui_left"
-
 [node name="TouchScreenRight" type="TouchScreenButton" parent="."]
-position = Vector2( 330, 480 )
-scale = Vector2( 2.5, 2.5 )
+position = Vector2( 261, 512 )
+scale = Vector2( 3, 3 )
 normal = SubResource( 4 )
 pressed = SubResource( 14 )
 shape = SubResource( 9 )
+passby_press = true
 action = "ui_right"
 
+[node name="TouchScreenLeft" type="TouchScreenButton" parent="."]
+position = Vector2( 37, 512 )
+scale = Vector2( 3, 3 )
+normal = SubResource( 3 )
+pressed = SubResource( 13 )
+shape = SubResource( 8 )
+passby_press = true
+action = "ui_left"
+
 [node name="TouchScreenJump" type="TouchScreenButton" parent="."]
-position = Vector2( 992, 480 )
-scale = Vector2( 2.5, 2.5 )
+position = Vector2( 1029, 512 )
+scale = Vector2( 3, 3 )
 normal = SubResource( 5 )
 pressed = SubResource( 15 )
 shape = SubResource( 10 )
+passby_press = true
 action = "ui_up"
