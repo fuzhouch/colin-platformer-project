@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://world.tres" type="TileSet" id=1]
 [ext_resource path="res://Steve.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Battery.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TouchscreenJoypad.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 32.2697 )
@@ -93,6 +94,7 @@ position = Vector2( 704, 319 )
 __meta__ = {
 "_edit_group_": true
 }
+detect_cliffs = false
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 2464, 319 )
@@ -100,12 +102,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Enemy3Fallable" parent="Enemies" instance=ExtResource( 4 )]
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 2016, 479 )
 __meta__ = {
 "_edit_group_": true
 }
-detect_cliffs = false
 
 [node name="Steve" parent="." instance=ExtResource( 2 )]
 position = Vector2( 216, 314 )
@@ -119,6 +120,18 @@ limit_right = 3582
 limit_bottom = 768
 editor_draw_limits = true
 editor_draw_drag_margin = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HeadsUpDisplay" type="CanvasLayer" parent="."]
+
+[node name="TouchscreenJoypad" parent="HeadsUpDisplay" instance=ExtResource( 5 )]
+position = Vector2( 96, -64 )
+__meta__ = {
+"_edit_group_": true
+}
+always_on_screen = false
 
 [connection signal="body_entered" from="GameOverDetectArea2D" to="Steve" method="_on_GameOverDetectArea2D_body_entered"]
 [connection signal="body_entered" from="GameWinDetectArea2D" to="Steve" method="_on_GameWinDetectArea2D_body_entered"]
