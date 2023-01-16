@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var in_double_jump = false
+var allow_double_jump = true
 var velocity = Vector2(0, 0)
 var coin = 0
 var hit_points = 2
@@ -11,9 +11,11 @@ var current_sprite
 # The constants here needs to be tuned, computing
 # with size of screen and floors.
 const SPEED = 180
-const GRAVITY = 10
-const JUMPFORCE = -500
-const DOUBLE_JUMP_FORCE = -300
+const GRAVITY = 40
+const JUMPFORCE = -1000
+const DOUBLE_JUMP_FORCE = -700
+const HIT_MOVEBACK = 500
+const MAX_FALL_SPEED = 2000
 
 func _ready():
     if use_tsetseg:
@@ -27,67 +29,58 @@ func _ready():
         $Tsetseg.visible = false
         $Mom.visible = false
 
-func _physics_process(_delta):
+func _set_move():
     if Input.is_action_pressed("ui_right"):
-        velocity.x = SPEED
         current_sprite.play("walk")
         current_sprite.flip_h = false
+        velocity.x = SPEED
     elif Input.is_action_pressed("ui_left"):
-        velocity.x = -SPEED
         current_sprite.play("walk")
         current_sprite.flip_h = true
+        velocity.x = -SPEED
     else:
         current_sprite.play("idle")
-
-    # Make falling faster if no blocking.
-    # When game running, velocity should be back to 0
-    # when hitting floor
-    velocity.y += GRAVITY
-    
-    # "Just" pressing means we process it only once at
-    # the very moment that a key is pressed, not every
-    # frame. It's important to use "just" pressing to
-    # process actions like jumping. If we use
-    # is_action_pressed() here,
-    # sprite can simply fly when holding jump key, because
-    # every frame with jump key pressed is treated as a new
-    # jump action.
+    # A possible bug is we set direction to
+    # 1 (left), -1 (right) and 0 (idle), then
+    # we set velocity.x = direction * SPEED.
+    # This can cause bug when hit() also
+    # change velocity.x due to enemy push back.
     #
-    # Is_on_floor() needs a definition of direction of floor.
-    # or it just does not work.
-    
-    # I added a small quiz to myself: How to implement dump jump?
-    # Below is the code
-    if Input.is_action_just_pressed("ui_up"):
-        if is_on_floor():
-            velocity.y = JUMPFORCE
-            in_double_jump = false
-        else:
-            if not in_double_jump: # Already in double jump status
-                velocity.y = DOUBLE_JUMP_FORCE
-                in_double_jump = true
-        
-    # $Sprite.play() appears to be a declarative call, that
-    # the last .play() calls decides the animation we finally
-    # play in this frame.
-    if not is_on_floor():
+    # Learning is, if we mean to "idle", then
+    # really don't change its value.
+
+func _set_jump():
+    var fall_adjustment = 1
+    var jump_falling = false
+    var on_floor = is_on_floor()
+    if on_floor:
+        # Reset to basic status
+        allow_double_jump = true
+    else:
         current_sprite.play("jump")
-    
-    # "Slide" means - character keeps moving with same speed
-    # when starts moving, it does not stop if we have no more
-    # action.
+        if velocity.y == 0:
+            jump_falling = true
+
+    if Input.is_action_just_pressed("ui_up"):
+        if on_floor:
+            velocity.y = JUMPFORCE
+        elif allow_double_jump:
+            allow_double_jump = false
+            velocity.y = DOUBLE_JUMP_FORCE
+
+    if jump_falling:
+        fall_adjustment = 1.2
+
+    if velocity.y < MAX_FALL_SPEED:
+        velocity.y += GRAVITY * fall_adjustment
+    else:
+        velocity.y = MAX_FALL_SPEED
+
+func _physics_process(_delta):
+    _set_move()
+    _set_jump()
     velocity = move_and_slide(velocity, Vector2.UP)
-    
     velocity.x = lerp(velocity.x, 0, 0.1)
-    # Lerp = Linear interpolation
-    # 0.1 = 10%
-    
-    # If you wanna take action when coin
-    # is collected, e.g., move to next level,
-    # Colin says we may consider doing something here.
-    # However I don't quite like this idea
-    # as this function is called every frame.
-    # Let's think about it for a better place.
 
 func game_over():
     var scene = get_tree().current_scene.filename
@@ -138,15 +131,15 @@ func hit(var enemy_x):
     # Temporarily change color a bit to display
     # a "hit" animation
     set_modulate(Color(1,0.3,0.3,0.5))
-    # Jump back a bit
+    # Enemy push back: Jump back a bit
     velocity.y = JUMPFORCE * 0.3
     current_sprite.play("jump")
-    $HitRecoverTimer.start()
+    $HitRecoverTimer.start() # Color back to normal
 
     if position.x <= enemy_x:
-        velocity.x = -800
+        velocity.x -= HIT_MOVEBACK
     elif position.x > enemy_x:
-        velocity.x = 800
+        velocity.x += HIT_MOVEBACK
 
 # Called by enemy sprite when we have a successful hit.
 func bounce():
