@@ -78,6 +78,7 @@ shape = SubResource( 4 )
 
 [node name="TouchscreenJoypad" parent="HeadsUpDisplay" instance=ExtResource( 3 )]
 position = Vector2( 0, 0 )
+always_on_screen = false
 
 [connection signal="body_entered" from="GameOverDetectArea2D" to="Steve" method="_on_GameOverDetectArea2D_body_entered"]
 [connection signal="body_entered" from="GameWinDetectArea2D" to="Steve" method="_on_GameWinDetectArea2D_body_entered"]
